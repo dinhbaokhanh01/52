@@ -1,0 +1,1526 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#173e34" />
+    <title>Không gian Mentor | Career Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --forest: #173e34;
+        --forest-light: #245748;
+        --paper: #f3f4ef;
+        --surface: #fff;
+        --ink: #25332d;
+        --muted: #78827c;
+        --line: #e1e5df;
+        --accent: #c76e49;
+        --gold: #d5aa65;
+        --success: #347153;
+        --warning: #a46a17;
+        --danger: #ad4939;
+        font-family: "DM Sans", "Segoe UI", sans-serif;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        min-width: 0;
+        min-height: 100vh;
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      button {
+        -webkit-tap-highlight-color: transparent;
+      }
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible {
+        outline: 3px solid rgba(199, 110, 73, 0.27);
+        outline-offset: 2px;
+      }
+      [hidden] {
+        display: none !important;
+      }
+
+      .app-shell {
+        display: grid;
+        min-height: 100vh;
+        grid-template-columns: 238px minmax(0, 1fr);
+      }
+      .sidebar {
+        position: sticky;
+        top: 0;
+        display: flex;
+        height: 100vh;
+        flex-direction: column;
+        padding: 25px 16px 18px;
+        background: var(--forest);
+        color: #f5f4ed;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 0 9px 28px;
+        color: inherit;
+        text-decoration: none;
+      }
+      .brand-logo {
+        display: block;
+        width: 48px;
+        aspect-ratio: 1;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        object-fit: contain;
+      }
+      .brand-text {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.035em;
+        line-height: 1.5;
+        text-transform: uppercase;
+      }
+      .brand-text span {
+        color: var(--gold);
+      }
+      .nav-label {
+        margin: 0 10px 9px;
+        color: rgba(245, 244, 237, 0.48);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+      }
+      .nav-list {
+        display: grid;
+        gap: 4px;
+      }
+      .nav-item {
+        display: flex;
+        min-height: 42px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 0 11px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        background: transparent;
+        color: rgba(245, 244, 237, 0.72);
+        cursor: pointer;
+        text-align: left;
+        font-size: 12px;
+        transition:
+          background 0.16s ease,
+          color 0.16s ease;
+      }
+      .nav-item:hover {
+        background: rgba(255, 255, 255, 0.07);
+        color: #fff;
+      }
+      .nav-item[aria-current="page"] {
+        border-color: rgba(255, 255, 255, 0.09);
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+        font-weight: 700;
+      }
+      .nav-item-text {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .nav-glyph {
+        width: 18px;
+        color: var(--gold);
+        text-align: center;
+        font-size: 14px;
+      }
+      .nav-count {
+        min-width: 20px;
+        padding: 2px 6px;
+        border-radius: 10px;
+        background: rgba(213, 170, 101, 0.18);
+        color: #f1c981;
+        text-align: center;
+        font-size: 10px;
+      }
+      .sidebar-spacer {
+        flex: 1;
+      }
+      .sidebar-footnote {
+        margin: 0 10px 18px;
+        color: rgba(245, 244, 237, 0.49);
+        font-size: 10px;
+        line-height: 1.6;
+      }
+      .account-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 8px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.17);
+      }
+      .avatar {
+        display: grid;
+        width: 32px;
+        aspect-ratio: 1;
+        place-items: center;
+        border-radius: 50%;
+        background: #d1a15b;
+        color: #24352e;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .account-name {
+        margin: 0;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .account-role {
+        margin: 3px 0 0;
+        color: rgba(245, 244, 237, 0.59);
+        font-size: 10px;
+      }
+
+      .main-area {
+        min-width: 0;
+      }
+      .topbar {
+        display: flex;
+        height: 64px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 0 clamp(22px, 4vw, 56px);
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.76);
+      }
+      .breadcrumb {
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .breadcrumb strong {
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .login-link {
+        display: inline-flex;
+        min-height: 32px;
+        align-items: center;
+        padding: 0 12px;
+        border-radius: 4px;
+        background: var(--forest);
+        color: #fff;
+        text-decoration: none;
+        font-size: 11px;
+        font-weight: 700;
+        transition: background 0.16s ease;
+      }
+      .login-link:hover {
+        background: var(--forest-light);
+      }
+
+      .content {
+        width: min(100%, 1500px);
+        margin: 0 auto;
+        padding: 31px clamp(22px, 4vw, 56px) 50px;
+      }
+      .page-heading {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 22px;
+      }
+      .heading-kicker {
+        margin: 0 0 8px;
+        color: var(--accent);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 0;
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 32px;
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 1.15;
+      }
+      .heading-description {
+        margin: 7px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+      .primary-button,
+      .secondary-button,
+      .quiet-button,
+      .danger-button {
+        display: inline-flex;
+        min-height: 37px;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 0 13px;
+        border: 1px solid transparent;
+        border-radius: 3px;
+        cursor: pointer;
+        white-space: nowrap;
+        font-size: 11px;
+        font-weight: 700;
+        transition:
+          background 0.16s ease,
+          border-color 0.16s ease,
+          color 0.16s ease,
+          transform 0.16s ease;
+      }
+      .primary-button {
+        background: var(--forest);
+        color: #fff;
+      }
+      .primary-button:hover {
+        transform: translateY(-1px);
+        background: var(--forest-light);
+      }
+      .secondary-button {
+        border-color: var(--line);
+        background: #fff;
+        color: var(--ink);
+      }
+      .secondary-button:hover,
+      .quiet-button:hover {
+        border-color: #b9c4ba;
+        background: #f7f8f5;
+      }
+      .quiet-button {
+        min-height: 30px;
+        padding: 0 8px;
+        border-color: transparent;
+        background: transparent;
+        color: #52635a;
+        font-size: 10px;
+      }
+      .danger-button {
+        min-height: 30px;
+        padding: 0 8px;
+        border-color: #edd4cd;
+        background: #fff9f7;
+        color: var(--danger);
+        font-size: 10px;
+      }
+      .danger-button:hover {
+        background: #fff0ec;
+      }
+      .plus {
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 1;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 11px;
+        margin-bottom: 23px;
+      }
+      .metric {
+        min-height: 91px;
+        padding: 15px 17px;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        background: var(--surface);
+      }
+      .metric-label {
+        margin: 0;
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 600;
+      }
+      .metric-bottom {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 11px;
+      }
+      .metric-value {
+        margin: 0;
+        color: var(--ink);
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 28px;
+        line-height: 1;
+      }
+      .metric-hint {
+        color: #89928c;
+        font-size: 9px;
+      }
+      .metric-accent {
+        color: var(--accent);
+      }
+
+      .section-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin: 0 0 12px;
+      }
+      .section-title {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .section-subtitle {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 10px;
+      }
+      .toolbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .filter-bar {
+        display: grid;
+        grid-template-columns:
+          minmax(210px, 1.5fr) repeat(2, minmax(145px, 0.8fr))
+          auto;
+        gap: 8px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-bottom: 0;
+        border-radius: 4px 4px 0 0;
+        background: #fff;
+      }
+      .control,
+      .form-control {
+        width: 100%;
+        min-height: 36px;
+        padding: 0 10px;
+        border: 1px solid #dce1db;
+        border-radius: 3px;
+        background: #fff;
+        color: var(--ink);
+        font-size: 11px;
+      }
+      .control::placeholder,
+      .form-control::placeholder {
+        color: #9aa39d;
+      }
+      .control:focus,
+      .form-control:focus {
+        border-color: #7d998b;
+        outline: 0;
+        box-shadow: 0 0 0 3px rgba(23, 62, 52, 0.07);
+      }
+      .filter-search {
+        position: relative;
+      }
+      .filter-search .control {
+        padding-left: 31px;
+      }
+      .search-glyph {
+        position: absolute;
+        top: 50%;
+        left: 11px;
+        transform: translateY(-52%);
+        color: #89938d;
+        font-size: 15px;
+        pointer-events: none;
+      }
+
+      .table-frame {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 0 0 4px 4px;
+        background: #fff;
+      }
+      .table-scroll {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+      }
+      th {
+        height: 36px;
+        padding: 0 13px;
+        border-bottom: 1px solid var(--line);
+        background: #f8f9f6;
+        color: #818b84;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      td {
+        height: 61px;
+        padding: 9px 13px;
+        border-bottom: 1px solid #edf0eb;
+        color: #59655e;
+        font-size: 10px;
+        vertical-align: middle;
+      }
+      tbody tr:last-child td {
+        border-bottom: 0;
+      }
+      tbody tr:hover {
+        background: #fcfcfa;
+      }
+      .person-cell {
+        min-width: 190px;
+      }
+      .person-name {
+        margin: 0;
+        color: #26362e;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .person-meta {
+        margin: 4px 0 0;
+        color: #929b94;
+        font-size: 9px;
+      }
+      .school-cell {
+        min-width: 145px;
+      }
+      .major-cell {
+        min-width: 125px;
+      }
+      .date-cell {
+        min-width: 125px;
+        white-space: nowrap;
+      }
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 4px 7px;
+        border-radius: 2px;
+        background: #edf5ef;
+        color: var(--success);
+        font-size: 9px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .status-pill::before {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: currentColor;
+        content: "";
+      }
+      .status-pill.pending {
+        background: #faf1df;
+        color: var(--warning);
+      }
+      .status-pill.awaiting-confirmation {
+        background: #f2eaf6;
+        color: #72518a;
+      }
+      .status-pill.rejected {
+        background: #f8e9e6;
+        color: var(--danger);
+      }
+      .document-download { margin-top: 12px; text-decoration: none; }
+      .status-pill.neutral {
+        background: #eef0ed;
+        color: #68736c;
+      }
+      .row-actions {
+        display: flex;
+        min-width: 128px;
+        align-items: center;
+        gap: 2px;
+      }
+      .empty-state {
+        padding: 35px 16px;
+        color: var(--muted);
+        text-align: center;
+        font-size: 11px;
+      }
+      .table-foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 13px;
+        border-top: 1px solid var(--line);
+        color: #89938d;
+        font-size: 9px;
+      }
+      .profile-pagination {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .profile-pagination button {
+        min-width: 28px;
+        min-height: 28px;
+        padding: 0 8px;
+      }
+
+      .application-list,
+      .document-list {
+        display: grid;
+        gap: 10px;
+      }
+      .work-panel {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        background: #fff;
+      }
+      .work-panel-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line);
+      }
+      .work-panel-head h2 {
+        margin: 0;
+        font-size: 12px;
+      }
+      .work-panel-head p {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 10px;
+      }
+      .application-actions,
+      .document-actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .document-title {
+        color: var(--ink);
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .document-file {
+        margin: 5px 0 0;
+        color: #8a948d;
+        font-size: 9px;
+      }
+      .document-type {
+        display: inline-block;
+        margin-bottom: 4px;
+        color: var(--accent);
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+      .info-banner {
+        margin-bottom: 15px;
+        padding: 11px 13px;
+        border-left: 3px solid var(--gold);
+        background: #fbf7ee;
+        color: #736342;
+        font-size: 10px;
+        line-height: 1.6;
+      }
+      .contract-upload {
+        display: grid;
+        grid-template-columns: minmax(180px, 1fr) minmax(220px, 1.3fr) auto;
+        align-items: end;
+        gap: 10px;
+        padding: 15px;
+        border-bottom: 1px solid var(--line);
+        background: #fcfcfa;
+      }
+      .form-field label {
+        display: block;
+        margin-bottom: 6px;
+        color: #506057;
+        font-size: 10px;
+        font-weight: 700;
+      }
+      input[type="file"].form-control {
+        padding: 7px 9px;
+      }
+      .contract-upload .form-control {
+        min-height: 36px;
+      }
+      #document-profile-filter {
+        width: auto;
+        min-width: 180px;
+      }
+      #document-filter {
+        width: auto;
+        min-width: 140px;
+      }
+
+      .dialog {
+        width: min(100% - 28px, 540px);
+        max-height: min(88vh, 820px);
+        padding: 0;
+        overflow: auto;
+        border: 1px solid #dce1db;
+        border-radius: 5px;
+        background: var(--surface);
+        color: var(--ink);
+        box-shadow: 0 24px 90px rgba(14, 35, 28, 0.2);
+      }
+      .dialog::backdrop {
+        background: rgba(12, 30, 25, 0.48);
+        backdrop-filter: blur(2px);
+      }
+      .dialog-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 19px 21px 14px;
+        border-bottom: 1px solid var(--line);
+      }
+      .dialog-eyebrow {
+        margin: 0 0 6px;
+        color: var(--accent);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .dialog-head h2 {
+        margin: 0;
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 23px;
+        font-weight: 500;
+      }
+      .dialog-head p {
+        margin: 5px 0 0;
+        color: var(--muted);
+        font-size: 10px;
+      }
+      .icon-button {
+        display: grid;
+        width: 30px;
+        aspect-ratio: 1;
+        flex: 0 0 auto;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        background: #fff;
+        color: #637168;
+        cursor: pointer;
+        font-size: 17px;
+      }
+      .dialog-body {
+        padding: 18px 21px 21px;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 13px 12px;
+      }
+      .form-field.full {
+        grid-column: 1 / -1;
+      }
+      .form-field input,
+      .form-field select,
+      .form-field textarea {
+        width: 100%;
+      }
+      .form-field textarea {
+        min-height: 78px;
+        padding: 9px 10px;
+        resize: vertical;
+      }
+      .dialog-note {
+        margin: 13px 0 0;
+        color: #8a948d;
+        font-size: 9px;
+        line-height: 1.6;
+      }
+      .dialog-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 19px;
+      }
+      .preview-sheet {
+        min-height: 190px;
+        padding: 22px;
+        border: 1px solid #e0e5df;
+        background: #f8f9f6;
+      }
+      .preview-sheet-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 13px;
+        border-bottom: 1px solid var(--line);
+        color: #8a948d;
+        font-size: 9px;
+        text-transform: uppercase;
+      }
+      .preview-sheet h3 {
+        margin: 19px 0 9px;
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 19px;
+        font-weight: 500;
+      }
+      .preview-sheet p {
+        color: #6f7972;
+        font-size: 10px;
+        line-height: 1.75;
+      }
+      .preview-placeholder {
+        display: grid;
+        min-height: 128px;
+        place-items: center;
+        color: #7f8b83;
+        text-align: center;
+        font-size: 10px;
+        line-height: 1.7;
+      }
+      .preview-placeholder strong {
+        display: block;
+        margin-bottom: 7px;
+        color: var(--forest);
+        font-size: 11px;
+      }
+      .toast {
+        position: fixed;
+        right: 22px;
+        bottom: 20px;
+        z-index: 5;
+        max-width: min(360px, calc(100vw - 32px));
+        padding: 12px 15px;
+        border: 1px solid #c9d9cc;
+        border-radius: 4px;
+        background: #fff;
+        color: var(--forest);
+        box-shadow: 0 8px 28px rgba(21, 43, 33, 0.13);
+        font-size: 11px;
+        line-height: 1.5;
+        animation: toast-in 0.22s ease-out both;
+      }
+      .toast[data-kind="error"] {
+        border-color: #edcdc5;
+        color: var(--danger);
+      }
+      @keyframes toast-in {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 1050px) {
+        .app-shell {
+          grid-template-columns: 205px minmax(0, 1fr);
+        }
+        .filter-bar {
+          grid-template-columns: minmax(180px, 1fr) 1fr 1fr;
+        }
+        .filter-bar .secondary-button {
+          grid-column: 1 / -1;
+          justify-self: start;
+        }
+        .metrics {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .contract-upload {
+          grid-template-columns: 1fr 1.2fr;
+        }
+        .contract-upload button {
+          grid-column: 1 / -1;
+          justify-self: start;
+        }
+      }
+      @media (max-width: 720px) {
+        .app-shell {
+          display: block;
+        }
+        .sidebar {
+          position: static;
+          width: 100%;
+          height: auto;
+          padding: 13px 15px 11px;
+        }
+        .brand {
+          padding: 0 4px 12px;
+        }
+        .sidebar .nav-label,
+        .sidebar-spacer,
+        .sidebar-footnote,
+        .account-card {
+          display: none;
+        }
+        .nav-list {
+          display: flex;
+          overflow-x: auto;
+          gap: 5px;
+          padding-bottom: 1px;
+          scrollbar-width: thin;
+        }
+        .nav-item {
+          min-height: 36px;
+          flex: 0 0 auto;
+          padding-inline: 9px;
+          font-size: 10px;
+        }
+        .nav-item-text {
+          gap: 6px;
+        }
+        .nav-glyph {
+          width: 14px;
+        }
+        .topbar {
+          height: 50px;
+          padding-inline: 17px;
+        }
+        .content {
+          padding: 24px 17px 35px;
+        }
+        .page-heading {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .page-heading > .primary-button {
+          align-self: stretch;
+        }
+        h1 {
+          font-size: 29px;
+        }
+        .metrics {
+          gap: 8px;
+          margin-bottom: 19px;
+        }
+        .metric {
+          min-height: 81px;
+          padding: 12px;
+        }
+        .metric-value {
+          font-size: 24px;
+        }
+        .metric-hint {
+          font-size: 8px;
+        }
+        .filter-bar {
+          grid-template-columns: 1fr 1fr;
+          padding: 9px;
+        }
+        .filter-search {
+          grid-column: 1 / -1;
+        }
+        .filter-bar .secondary-button {
+          grid-column: auto;
+        }
+        .section-toolbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .toolbar-actions {
+          align-self: stretch;
+        }
+        .toolbar-actions > button {
+          flex: 1;
+        }
+        #document-profile-filter,
+        #document-filter {
+          width: 0;
+          min-width: 0;
+          flex: 1 1 0;
+        }
+        .work-panel-head {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .application-actions,
+        .document-actions {
+          width: 100%;
+        }
+        .application-actions button,
+        .document-actions button {
+          flex: 1;
+        }
+        .contract-upload {
+          grid-template-columns: 1fr;
+        }
+        .contract-upload button {
+          grid-column: auto;
+          justify-self: stretch;
+        }
+        .page-heading .primary-button {
+          width: 100%;
+        }
+        .table-foot {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        .form-field.full {
+          grid-column: auto;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Điều hướng HR">
+        <a class="brand" href="dang-nhap.html">
+          <img
+            class="brand-logo"
+            src="codegym-logo.svg"
+            alt="CODEGYM - Hệ thống đào tạo lập trình hiện đại"
+          />
+          <span class="brand-text">CODEGYM</span>
+        </a>
+        <p class="nav-label">Không gian nhân sự</p>
+        <nav class="nav-list" aria-label="Chức năng quản lý">
+          <button
+            class="nav-item"
+            type="button"
+            data-view="profiles"
+            aria-current="page"
+          >
+            <span class="nav-item-text"
+              ><span class="nav-glyph" aria-hidden="true">▤</span>Hồ sơ thực
+              tập</span
+            >
+          </button>
+          <button class="nav-item" type="button" data-view="applications">
+            <span class="nav-item-text"
+              ><span class="nav-glyph" aria-hidden="true">▧</span>Đơn xin</span
+            >
+            <span class="nav-count" id="application-count">0</span>
+          </button>
+          <button class="nav-item" type="button" data-view="documents">
+            <span class="nav-item-text"
+              ><span class="nav-glyph" aria-hidden="true">▣</span>Tài liệu & hợp
+              đồng</span
+            >
+            <span class="nav-count" id="document-count">0</span>
+          </button>
+        </nav>
+        <div class="sidebar-spacer"></div>
+        <p class="sidebar-footnote">
+          Quản lý hồ sơ và chương trình thực tập tại một nơi.
+        </p>
+        <div class="account-card">
+          <span class="avatar" aria-hidden="true">HR</span>
+          <div>
+            <p class="account-name">Quản trị nhân sự</p>
+            <p class="account-role">Tài khoản HR</p>
+          </div>
+        </div>
+      </aside>
+
+      <div class="main-area">
+        <header class="topbar">
+          <div class="breadcrumb">
+            Career Portal <span aria-hidden="true">/</span>
+            <strong id="breadcrumb-current">Hồ sơ thực tập</strong>
+          </div>
+          <div class="topbar-right">
+            <a class="login-link" href="dang-nhap.html">Đăng xuất</a>
+          </div>
+        </header>
+
+        <main class="content">
+          <section
+            class="view-section"
+            id="view-profiles"
+            aria-labelledby="page-title"
+          >
+            <div class="page-heading">
+              <div>
+                <p class="heading-kicker">Quản lý chương trình</p>
+                <h1 id="page-title">Hồ sơ thực tập</h1>
+                <p class="heading-description">
+                  Theo dõi thông tin, trường học và tiến độ của thực tập sinh.
+                </p>
+              </div>
+              <button class="primary-button" id="add-profile" type="button">
+                <span class="plus" aria-hidden="true">+</span>Thêm hồ sơ
+              </button>
+            </div>
+
+            <div class="metrics" aria-label="Thống kê hồ sơ">
+              <article class="metric">
+                <p class="metric-label">Tổng hồ sơ</p>
+                <div class="metric-bottom">
+                  <p class="metric-value" id="metric-total">0</p>
+                  <span class="metric-hint">trong hệ thống</span>
+                </div>
+              </article>
+              <article class="metric">
+                <p class="metric-label">Đang thực tập</p>
+                <div class="metric-bottom">
+                  <p class="metric-value" id="metric-active">0</p>
+                  <span class="metric-hint">hồ sơ hoạt động</span>
+                </div>
+              </article>
+              <article class="metric">
+                <p class="metric-label">Đơn chờ duyệt</p>
+                <div class="metric-bottom">
+                  <p
+                    class="metric-value metric-accent"
+                    id="metric-applications"
+                  >
+                    0
+                  </p>
+                  <span class="metric-hint">cần phản hồi</span>
+                </div>
+              </article>
+              <article class="metric">
+                <p class="metric-label">Tài liệu chờ xem</p>
+                <div class="metric-bottom">
+                  <p class="metric-value metric-accent" id="metric-documents">
+                    0
+                  </p>
+                  <span class="metric-hint">cần xử lý</span>
+                </div>
+              </article>
+            </div>
+
+            <div class="section-toolbar">
+              <div>
+                <h2 class="section-title">Danh sách thực tập sinh</h2>
+                <p class="section-subtitle">
+                  Tìm theo tên, mã sinh viên, trường hoặc ngành.
+                </p>
+              </div>
+              <div class="toolbar-actions">
+                <button
+                  class="secondary-button"
+                  type="button"
+                  data-open-view="documents"
+                >
+                  Xem tài liệu chờ duyệt
+                </button>
+              </div>
+            </div>
+            <div class="filter-bar" role="search">
+              <label class="filter-search"
+                ><span class="search-glyph" aria-hidden="true">⌕</span
+                ><input
+                  class="control"
+                  id="profile-search"
+                  type="search"
+                  placeholder="Tìm tên, mã sinh viên, email..."
+                  aria-label="Tìm thực tập sinh"
+              /></label>
+              <select
+                class="control"
+                id="school-filter"
+                aria-label="Lọc theo trường"
+              >
+                <option value="">Tất cả trường</option>
+              </select>
+              <select
+                class="control"
+                id="major-filter"
+                aria-label="Lọc theo ngành"
+              >
+                <option value="">Tất cả ngành</option>
+              </select>
+              <button class="secondary-button" id="clear-filters" type="button">
+                Xóa bộ lọc
+              </button>
+            </div>
+            <div class="table-frame">
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Thực tập sinh</th>
+                      <th>Trường</th>
+                      <th>Ngành</th>
+                      <th>Thời gian</th>
+                      <th>Trạng thái</th>
+                      <th>Thao tác</th>
+                    </tr>
+                  </thead>
+                  <tbody id="profiles-table"></tbody>
+                </table>
+              </div>
+              <div class="table-foot">
+                <span id="profile-result-count">0 hồ sơ</span
+                ><div class="profile-pagination" aria-label="Phân trang hồ sơ">
+                  <button class="quiet-button" id="profile-page-previous" type="button" aria-label="Trang trước">‹</button>
+                  <span id="profile-page-label">Trang 1/1</span>
+                  <button class="quiet-button" id="profile-page-next" type="button" aria-label="Trang sau">›</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section
+            class="view-section"
+            id="view-applications"
+            aria-labelledby="applications-title"
+            hidden
+          >
+            <div class="page-heading">
+              <div>
+                <p class="heading-kicker">Tiếp nhận hồ sơ</p>
+                <h1 id="applications-title">Đơn xin thực tập</h1>
+                <p class="heading-description">
+                  Xem thông tin ứng tuyển và duyệt hoặc từ chối đơn.
+                </p>
+              </div>
+              <button
+                class="secondary-button"
+                type="button"
+                data-open-view="profiles"
+              >
+                Quay lại hồ sơ
+              </button>
+            </div>
+            <div class="metrics" aria-label="Thống kê đơn xin">
+              <article class="metric">
+                <p class="metric-label">Tổng đơn</p>
+                <div class="metric-bottom">
+                  <p class="metric-value" id="app-total">0</p>
+                  <span class="metric-hint">đã tiếp nhận</span>
+                </div>
+              </article>
+              <article class="metric">
+                <p class="metric-label">Chờ duyệt</p>
+                <div class="metric-bottom">
+                  <p class="metric-value metric-accent" id="app-pending">0</p>
+                  <span class="metric-hint">cần quyết định</span>
+                </div>
+              </article>
+              <article class="metric">
+                <p class="metric-label">Đã duyệt</p>
+                <div class="metric-bottom">
+                  <p class="metric-value" id="app-approved">0</p>
+                  <span class="metric-hint">ứng viên phù hợp</span>
+                </div>
+              </article>
+              <article class="metric">
+                <p class="metric-label">Đã từ chối</p>
+                <div class="metric-bottom">
+                  <p class="metric-value" id="app-rejected">0</p>
+                  <span class="metric-hint">đã phản hồi</span>
+                </div>
+              </article>
+            </div>
+            <div class="section-toolbar">
+              <div>
+                <h2 class="section-title">Hộp thư ứng tuyển</h2>
+                <p class="section-subtitle">
+                  Quyết định được lưu trên SQL Server và cập nhật ngay sau khi xử lý.
+                </p>
+              </div>
+            </div>
+            <div class="application-list" id="applications-list"></div>
+            <div class="section-toolbar" style="margin-top: 24px">
+              <div>
+                <h2 class="section-title">Lịch sử xử lý</h2>
+                <p class="section-subtitle">Các quyết định duyệt/từ chối đơn và tài liệu.</p>
+              </div>
+            </div>
+            <div class="document-list" id="review-history-list"></div>
+          </section>
+
+          <section
+            class="view-section"
+            id="view-documents"
+            aria-labelledby="documents-title"
+            hidden
+          >
+            <div class="page-heading">
+              <div>
+                <p class="heading-kicker">Kiểm tra & lưu trữ</p>
+                <h1 id="documents-title">Tài liệu & hợp đồng</h1>
+                <p class="heading-description">
+                  Xem trạng thái giấy tờ và thêm hợp đồng thực tập vào hồ sơ.
+                </p>
+              </div>
+            </div>
+            <div class="info-banner">
+              Tệp hợp đồng được tải lên và lưu trong SQL Server. Tệp mới sẽ thay thế hợp đồng hiện tại của hồ sơ.
+            </div>
+            <div class="work-panel" style="margin-bottom: 15px">
+              <div class="work-panel-head">
+                <div>
+                  <h2>Tải lên hợp đồng thực tập</h2>
+                  <p>Chọn thực tập sinh và tệp hợp đồng để gắn vào hồ sơ.</p>
+                </div>
+              </div>
+              <form class="contract-upload" id="contract-form">
+                <div class="form-field">
+                  <label for="contract-profile">Thực tập sinh</label
+                  ><select
+                    class="form-control"
+                    id="contract-profile"
+                    name="profileId"
+                    required
+                  ></select>
+                </div>
+                <div class="form-field">
+                  <label for="contract-file"
+                    >Tệp hợp đồng (PDF, DOC, DOCX)</label
+                  ><input
+                    class="form-control"
+                    id="contract-file"
+                    name="contractFile"
+                    type="file"
+                    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    required
+                  />
+                </div>
+                <button class="primary-button" type="submit">
+                  Chọn & tải lên
+                </button>
+              </form>
+            </div>
+            <div class="section-toolbar">
+              <div>
+                <h2 class="section-title">Danh sách tài liệu</h2>
+                <p class="section-subtitle">
+                  Tài liệu cần HR xem sẽ được hiển thị ở đầu danh sách.
+                </p>
+              </div>
+              <div class="toolbar-actions">
+                <select
+                  class="control"
+                  id="document-profile-filter"
+                  aria-label="Lọc theo thực tập sinh"
+                >
+                  <option value="">Tất cả thực tập sinh</option></select
+                ><select
+                  class="control"
+                  id="document-filter"
+                  aria-label="Lọc trạng thái tài liệu"
+                >
+                  <option value="all">Tất cả tài liệu</option>
+                  <option value="Chờ duyệt">Chờ duyệt</option>
+                  <option value="Đã duyệt">Đã duyệt</option>
+                  <option value="Từ chối">Từ chối</option>
+                </select>
+              </div>
+            </div>
+            <div class="document-list" id="documents-list"></div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <dialog
+      class="dialog"
+      id="profile-dialog"
+      aria-labelledby="profile-dialog-title"
+    >
+      <form id="profile-form">
+        <div class="dialog-head">
+          <div>
+            <p class="dialog-eyebrow">Thông tin thực tập sinh</p>
+            <h2 id="profile-dialog-title">Thêm hồ sơ</h2>
+            <p>Nhập thông tin cơ bản để tạo hồ sơ theo dõi.</p>
+          </div>
+          <button
+            class="icon-button"
+            type="button"
+            data-close-dialog="profile-dialog"
+            aria-label="Đóng"
+          >
+            ×
+          </button>
+        </div>
+        <div class="dialog-body">
+          <input type="hidden" name="profileId" />
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="profile-name">Họ và tên *</label
+              ><input
+                class="form-control"
+                id="profile-name"
+                name="name"
+                autocomplete="name"
+                required
+              />
+            </div>
+            <div class="form-field">
+              <label for="profile-student-id">Mã sinh viên *</label
+              ><input
+                class="form-control"
+                id="profile-student-id"
+                name="studentId"
+                required
+              />
+            </div>
+            <div class="form-field full">
+              <label for="profile-email">Email *</label
+              ><input
+                class="form-control"
+                id="profile-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <div class="form-field">
+              <label for="profile-school">Trường *</label
+              ><input
+                class="form-control"
+                id="profile-school"
+                name="school"
+                required
+              />
+            </div>
+            <div class="form-field">
+              <label for="profile-major">Ngành *</label
+              ><input
+                class="form-control"
+                id="profile-major"
+                name="major"
+                required
+              />
+            </div>
+            <div class="form-field">
+              <label for="profile-start-date">Ngày bắt đầu *</label
+              ><input
+                class="form-control"
+                id="profile-start-date"
+                name="startDate"
+                type="date"
+                required
+              />
+            </div>
+            <div class="form-field">
+              <label for="profile-end-date">Ngày kết thúc *</label
+              ><input
+                class="form-control"
+                id="profile-end-date"
+                name="endDate"
+                type="date"
+                required
+              />
+            </div>
+            <div class="form-field full">
+              <label for="profile-status">Trạng thái</label
+              ><select class="form-control" id="profile-status" name="status">
+                <option>Đang thực tập</option>
+                <option>Chờ bắt đầu</option>
+                <option>Đã hoàn thành</option>
+              </select>
+            </div>
+          </div>
+          <p class="dialog-note">Hồ sơ sẽ được lưu vào cơ sở dữ liệu của hệ thống.</p>
+          <div class="dialog-actions">
+            <button
+              class="secondary-button"
+              type="button"
+              data-close-dialog="profile-dialog"
+            >
+              Hủy</button
+            ><button class="primary-button" type="submit">Lưu hồ sơ</button>
+          </div>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog
+      class="dialog"
+      id="document-dialog"
+      aria-labelledby="document-dialog-title"
+    >
+      <div class="dialog-head">
+        <div>
+          <p class="dialog-eyebrow" id="document-dialog-type">
+            Tài liệu thực tập
+          </p>
+          <h2 id="document-dialog-title">Xem tài liệu</h2>
+          <p id="document-dialog-owner"></p>
+        </div>
+        <button
+          class="icon-button"
+          type="button"
+          data-close-dialog="document-dialog"
+          aria-label="Đóng"
+        >
+          ×
+        </button>
+      </div>
+      <div class="dialog-body">
+        <div class="preview-sheet">
+          <div class="preview-sheet-top">
+            <span>Career Portal · Hồ sơ thực tập</span
+            ><span id="document-dialog-status"></span>
+          </div>
+          <div class="preview-placeholder">
+            <div>
+              <strong id="document-dialog-file"></strong
+              ><span
+                >Tệp được lưu trong SQL Server. Dùng liên kết bên dưới để mở hoặc tải xuống.</span
+              >
+            </div>
+          </div>
+        </div>
+        <a class="secondary-button document-download" id="document-download" target="_blank" rel="noopener">Mở / tải tệp</a>
+        <p class="dialog-note" id="document-dialog-note"></p>
+        <div class="dialog-actions">
+          <button
+            class="secondary-button"
+            type="button"
+            data-close-dialog="document-dialog"
+          >
+            Đóng</button
+          ><button class="danger-button" id="document-reject" type="button">
+            Từ chối</button
+          ><button class="primary-button" id="document-approve" type="button">
+            Duyệt tài liệu
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+    <script src="session-bridge.js"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,81 @@
+#integrated-portal{font-family:"DM Sans","Segoe UI",sans-serif;color:#25332d;background:#f3f4ef;font-size:15px}
+#integrated-portal *{box-sizing:border-box}
+#integrated-portal{margin:0}
+#integrated-portal header{height:72px;background:#fff;border-bottom:1px solid #e1e5df;display:flex;align-items:center;gap:24px;padding:0 32px}
+#integrated-portal .brand{font-size:23px;font-weight:bold;text-decoration:none;color:#173e34}
+#integrated-portal #identity{margin-left:auto}
+#integrated-portal button,#integrated-portal a.action{background:#173e34;color:white;border:0;border-radius:6px;padding:10px 16px;cursor:pointer;font:inherit;text-decoration:none}
+#integrated-portal button:hover{background:#245748}
+#integrated-portal button:disabled{opacity:.6;cursor:wait}
+#integrated-portal .secondary{background:#e6eef2;color:#25332d}
+#integrated-portal h1{font-size:29px;margin:8px 0 20px}
+#integrated-portal h2{font-size:21px}
+#integrated-portal .auth{max-width:560px;margin:48px auto;padding:32px;background:white;border-radius:12px;border:1px solid #e1e5df}
+#integrated-portal label{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;font-weight:600}
+#integrated-portal input,#integrated-portal select,#integrated-portal textarea{border:1px solid #bccbd5;border-radius:5px;padding:10px;font:inherit;min-width:0;background:#fff}
+#integrated-portal textarea{min-height:95px}
+#integrated-portal details{margin-top:24px}
+#integrated-portal summary{cursor:pointer;margin-bottom:16px;color:#173e34}
+#integrated-portal #workspace{display:grid;grid-template-columns:240px 1fr}
+#integrated-portal #workspace[hidden]{display:none}
+#integrated-portal aside{background:#fff;padding:24px 14px;min-height:calc(100vh - 72px);border-right:1px solid #e1e5df}
+#integrated-portal nav{display:flex;flex-direction:column;gap:5px}
+#integrated-portal nav button,#integrated-portal nav a{text-align:left;padding:12px 15px;background:transparent;color:#245748;border-radius:6px;text-decoration:none}
+#integrated-portal nav button.active{background:#e6f1f4;color:#173e34;font-weight:bold}
+#integrated-portal main{padding:30px;min-width:0}
+#integrated-portal .heading{display:flex;align-items:center;justify-content:space-between}
+#integrated-portal .eyebrow{font-size:11px;letter-spacing:2px;color:#58768b}
+#integrated-portal #toolbar{display:flex;gap:12px;margin:20px 0;flex-wrap:wrap}
+#integrated-portal .table-wrap{overflow-x:auto;background:white;border:1px solid #e1e5df;border-radius:8px}
+#integrated-portal table{border-collapse:collapse;width:100%;font-size:14px}
+#integrated-portal th,#integrated-portal td{padding:14px 16px;border-bottom:1px solid #e6ebef;text-align:left;vertical-align:top}
+#integrated-portal th{background:#f3f4ef;color:#245748;white-space:nowrap}
+#integrated-portal td{max-width:440px;overflow-wrap:anywhere;white-space:pre-line}
+#integrated-portal td button,#integrated-portal td a{margin:3px;font-size:12px;padding:7px 10px}
+#integrated-portal .empty{padding:45px;background:white;text-align:center;color:#657c8c}
+#integrated-portal .cards{display:flex;gap:18px;margin-bottom:24px}
+#integrated-portal .card{padding:20px;background:white;border:1px solid #e1e5df;border-radius:8px;flex:1}
+#integrated-portal .card b{display:block;font-size:30px;margin-top:12px}
+#integrated-portal dialog{border:1px solid #d1dce3;border-radius:12px;width:min(740px,95vw);max-height:90vh;padding:26px}
+#integrated-portal dialog::backdrop{background:#162c45a8}
+#integrated-portal .fields{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+#integrated-portal .fields .wide{grid-column:1/-1}
+#integrated-portal .buttons{display:flex;gap:12px;justify-content:flex-end}
+#integrated-portal #message{position:fixed;bottom:15px;right:20px;max-width:550px;padding:14px;background:#173e34;color:white;border-radius:7px;z-index:10}
+#integrated-portal #message:empty{display:none}
+#integrated-portal #form-error{color:#a12222}
+#integrated-portal .detail{white-space:pre-wrap;background:#fff;padding:18px}
+#integrated-portal body.loading{cursor:progress}
+@media(max-width:800px){#integrated-portal #workspace{grid-template-columns:1fr}
+#integrated-portal aside{min-height:0}
+#integrated-portal nav{flex-direction:row;flex-wrap:wrap}
+#integrated-portal main{padding:18px}
+#integrated-portal .fields{grid-template-columns:1fr}
+#integrated-portal .cards{flex-direction:column}
+#integrated-portal header{padding:12px;font-size:12px}
+#integrated-portal h1{font-size:24px}
+}
+@media print{#integrated-portal header,#integrated-portal aside,#integrated-portal #toolbar,#integrated-portal #create,#integrated-portal #message,#integrated-portal dialog{display:none!important}
+#integrated-portal #workspace{display:block}
+#integrated-portal main{padding:0}
+#integrated-portal table{font-size:10px}
+#integrated-portal th,#integrated-portal td{padding:6px}
+#integrated-portal .table-wrap{overflow:visible}
+#integrated-portal{background:white}
+}
+#integrated-portal nav button:hover{background:#dcebf0;color:#173e34}
+
+#integrated-portal[hidden]{display:none!important}
+#integrated-portal{font-family:"DM Sans","Segoe UI",sans-serif;background:var(--paper);color:var(--ink)}
+#integrated-portal>header,#integrated-portal #workspace>aside{display:none!important}
+#integrated-portal #workspace{display:block}
+#integrated-portal #workspace[hidden]{display:none}
+#integrated-portal main{padding:0}
+#integrated-portal h1{font-family:"Playfair Display",Georgia,serif;color:var(--forest);font-size:32px}
+#integrated-portal button{border-radius:9px}
+#integrated-portal .table-wrap,#integrated-portal .card{border-radius:14px;border-color:var(--line)}
+#integrated-portal table{table-layout:auto;min-width:680px}
+#integrated-portal td:nth-child(3){white-space:pre;min-width:150px;overflow-wrap:normal;word-break:normal}
+.sidebar .nav-list{overflow-y:auto;min-height:0;flex-shrink:1;scrollbar-width:thin;scrollbar-color:#7e9a8c transparent}
+.sidebar .nav-item{flex-shrink:0}
+@media print{.sidebar,.topbar{display:none!important}.app-shell{display:block!important}#integrated-portal #workspace{display:block}}

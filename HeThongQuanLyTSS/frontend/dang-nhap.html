@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#17473b" />
+    <title>Đăng nhập | Career Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --forest: #17473b;
+        --forest-deep: #133a31;
+        --paper: #f7f6f2;
+        --ink: #202e29;
+        --muted: #77817b;
+        --line: #d9ddd7;
+        --accent: #c96c42;
+        --gold: #d2a55d;
+        font-family: "DM Sans", "Segoe UI", sans-serif;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 0;
+        min-height: 100vh;
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+      button {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .login-layout {
+        display: grid;
+        grid-template-columns: minmax(430px, 52.2%) minmax(0, 1fr);
+        min-height: 100vh;
+      }
+
+      .story-panel {
+        position: relative;
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        overflow: hidden;
+        padding: 42px clamp(36px, 7.2vw, 88px) 34px;
+        isolation: isolate;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.045) 1px,
+            transparent 1px
+          ),
+          radial-gradient(
+            ellipse at 22% 0%,
+            rgba(112, 150, 108, 0.13),
+            transparent 47%
+          ),
+          linear-gradient(145deg, #1a4d40, var(--forest-deep));
+        background-size:
+          44px 44px,
+          44px 44px,
+          auto,
+          auto;
+        color: #f6f3e9;
+      }
+
+      .story-panel::after {
+        position: absolute;
+        z-index: -1;
+        right: 5%;
+        bottom: 8%;
+        color: rgba(236, 238, 218, 0.055);
+        content: attr(data-watermark);
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: clamp(150px, 22vw, 300px);
+        line-height: 0.8;
+        pointer-events: none;
+      }
+
+      .brand {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        gap: 13px;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .brand-logo {
+        display: block;
+        width: 62px;
+        aspect-ratio: 1;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        object-fit: contain;
+      }
+
+      .brand-name {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.035em;
+        text-transform: uppercase;
+      }
+
+      .brand-name span {
+        color: var(--gold);
+      }
+
+      .story-copy {
+        width: min(100%, 590px);
+        margin-block: auto;
+        padding-block: 64px 86px;
+        animation: rise-in 0.7s ease-out both;
+      }
+
+      .eyebrow {
+        margin: 0 0 22px;
+        color: var(--gold);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.045em;
+        text-transform: uppercase;
+      }
+
+      .story-copy h1 {
+        max-width: 630px;
+        margin: 0;
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: clamp(42px, 5.15vw, 72px);
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 1.02;
+        text-wrap: balance;
+      }
+
+      .story-copy > p:last-child {
+        max-width: 400px;
+        margin: 25px 0 0;
+        color: rgba(246, 243, 233, 0.72);
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.8;
+      }
+
+      .story-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding-top: 18px;
+        border-top: 1px solid rgba(246, 243, 233, 0.24);
+        color: rgba(246, 243, 233, 0.78);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.035em;
+        text-transform: uppercase;
+      }
+
+      .story-count {
+        color: #f6f3e9;
+      }
+      .story-caption {
+        text-align: right;
+      }
+
+      .form-panel {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        justify-content: center;
+        padding: 68px clamp(36px, 7vw, 100px) 30px;
+        background: var(--paper);
+      }
+
+      .form-content {
+        width: min(100%, 450px);
+        margin-inline: auto;
+        animation: rise-in 0.7s 0.08s ease-out both;
+      }
+
+      .form-eyebrow {
+        margin: 0 0 14px;
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.045em;
+        text-transform: uppercase;
+      }
+
+      .form-content h2 {
+        margin: 0;
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: clamp(31px, 3vw, 40px);
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 1.2;
+        text-wrap: balance;
+      }
+
+      .form-intro {
+        margin: 11px 0 37px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.65;
+      }
+
+      .role-tabs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-bottom: 28px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .role-tab {
+        position: relative;
+        min-height: 48px;
+        padding: 0 8px 14px;
+        border: 0;
+        background: transparent;
+        color: #7c8580;
+        cursor: pointer;
+        font-size: 12px;
+        transition: color 0.18s ease;
+      }
+
+      .role-tab::after {
+        position: absolute;
+        right: 0;
+        bottom: -1px;
+        left: 0;
+        height: 2px;
+        background: transparent;
+        content: "";
+        transition: background-color 0.18s ease;
+      }
+
+      .role-tab[aria-selected="true"] {
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .role-tab[aria-selected="true"]::after {
+        background: var(--accent);
+      }
+      .role-number {
+        margin-right: 8px;
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .role-tab:focus-visible,
+      .text-button:focus-visible,
+      .submit-button:focus-visible,
+      input:focus-visible {
+        outline: 3px solid rgba(201, 108, 66, 0.3);
+        outline-offset: 3px;
+      }
+
+      .field {
+        margin-bottom: 20px;
+      }
+
+      .field-heading {
+        display: flex;
+        min-height: 18px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 9px;
+      }
+
+      .field label {
+        color: #35413b;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .text-button {
+        padding: 2px 0;
+        border: 0;
+        background: transparent;
+        color: var(--accent);
+        cursor: pointer;
+        font-size: 11px;
+      }
+
+      .input-wrap {
+        position: relative;
+      }
+
+      .field input:not([type="checkbox"]) {
+        width: 100%;
+        height: 51px;
+        padding: 0 15px;
+        border: 1px solid #d8ddd7;
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--ink);
+        font-size: 13px;
+        transition:
+          border-color 0.18s ease,
+          box-shadow 0.18s ease,
+          background 0.18s ease;
+      }
+
+      .field input:not([type="checkbox"]):focus {
+        border-color: #6c8b7c;
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(23, 71, 59, 0.08);
+        outline: 0;
+      }
+
+      .field input::placeholder {
+        color: #a7afaa;
+        opacity: 1;
+      }
+
+      .password-input {
+        padding-right: 62px !important;
+      }
+
+      .password-toggle {
+        position: absolute;
+        top: 50%;
+        right: 13px;
+        padding: 5px 2px;
+        transform: translateY(-50%);
+        border: 0;
+        background: transparent;
+        color: #64716a;
+        cursor: pointer;
+        font-size: 11px;
+      }
+
+      .remember-row {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin: -1px 0 24px;
+        color: var(--muted);
+        cursor: pointer;
+        font-size: 12px;
+        line-height: 1.4;
+      }
+
+      .remember-row input {
+        width: 15px;
+        height: 15px;
+        margin: 0;
+        accent-color: var(--forest);
+        cursor: pointer;
+      }
+
+      .submit-button {
+        display: flex;
+        width: 100%;
+        min-height: 53px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 17px;
+        border: 0;
+        border-radius: 3px;
+        background: var(--forest);
+        color: white;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 700;
+        transition:
+          background-color 0.18s ease,
+          transform 0.18s ease;
+      }
+
+      .submit-button:hover {
+        transform: translateY(-1px);
+        background: #205847;
+      }
+      .submit-arrow {
+        font-size: 18px;
+        font-weight: 400;
+      }
+
+      .form-note,
+      .status-message {
+        min-height: 39px;
+        margin: 16px 0 0;
+        color: #87908a;
+        font-size: 11px;
+        line-height: 1.65;
+      }
+
+      .status-message:empty {
+        visibility: hidden;
+      }
+      .status-message {
+        color: var(--forest);
+      }
+      .status-message[data-state="error"] {
+        color: #a74735;
+      }
+
+      .page-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        width: min(100%, 520px);
+        margin: auto auto 0;
+        padding-top: 34px;
+        color: #839087;
+        font-size: 9px;
+        letter-spacing: 0.025em;
+        text-transform: uppercase;
+      }
+
+      @keyframes rise-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 900px) {
+        .login-layout {
+          grid-template-columns: minmax(340px, 44%) minmax(0, 1fr);
+        }
+        .story-panel {
+          padding-inline: 34px;
+        }
+        .form-panel {
+          padding-inline: clamp(28px, 5vw, 55px);
+        }
+        .story-copy h1 {
+          font-size: clamp(39px, 6vw, 58px);
+        }
+      }
+
+      @media (max-width: 680px) {
+        .login-layout {
+          display: flex;
+          flex-direction: column;
+        }
+        .story-panel {
+          min-height: 290px;
+          padding: 24px 25px 20px;
+        }
+        .brand-logo {
+          width: 54px;
+        }
+        .story-copy {
+          padding: 38px 0 34px;
+        }
+        .story-copy .eyebrow {
+          margin-bottom: 12px;
+          font-size: 10px;
+        }
+        .story-copy h1 {
+          max-width: 480px;
+          font-size: clamp(37px, 10vw, 52px);
+        }
+        .story-copy > p:last-child {
+          max-width: 390px;
+          margin-top: 12px;
+          font-size: 13px;
+        }
+        .story-footer {
+          padding-top: 12px;
+          font-size: 9px;
+        }
+        .story-panel::after {
+          right: 3%;
+          bottom: 11%;
+          font-size: 145px;
+        }
+        .form-panel {
+          min-height: auto;
+          flex: 1;
+          padding: 36px 25px 21px;
+        }
+        .form-content h2 {
+          font-size: 34px;
+        }
+        .form-intro {
+          margin-bottom: 28px;
+        }
+        .page-footer {
+          padding-top: 28px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="login-layout">
+      <section
+        class="story-panel"
+        id="story-panel"
+        data-watermark="01"
+        aria-label="Giới thiệu Career Portal"
+      >
+        <a class="brand" href="#" aria-label="Career Portal - trang chủ">
+          <img
+            class="brand-logo"
+            src="codegym-logo.svg"
+            alt="CODEGYM - Hệ thống đào tạo lập trình hiện đại"
+          />
+          <span class="brand-name">CODEGYM</span>
+        </a>
+
+        <div class="story-copy" aria-live="polite">
+          <p class="eyebrow" id="story-eyebrow">
+            Kết nối cơ hội, mở lối tương lai
+          </p>
+          <h1 id="story-title">Hành trình nghề nghiệp bắt đầu từ đây.</h1>
+          <p id="story-description">
+            Một bước đăng nhập để theo dõi hồ sơ và bắt đầu kỳ thực tập của bạn.
+          </p>
+        </div>
+
+        <footer class="story-footer">
+          <span class="story-count" id="story-count">01 / 02</span>
+          <span class="story-caption">Nền tảng quản lý thực tập</span>
+        </footer>
+      </section>
+
+      <section class="form-panel" aria-labelledby="form-title">
+        <div class="form-content">
+          <p class="form-eyebrow">Cổng đăng nhập</p>
+          <h2 id="form-title">Chào bạn, thực tập sinh</h2>
+          <p class="form-intro" id="form-intro">
+            Đăng nhập để tiếp tục quản lý hồ sơ thực tập.
+          </p>
+
+          <div
+            class="role-tabs"
+            role="tablist"
+            aria-label="Chọn loại tài khoản"
+          >
+            <button
+              class="role-tab"
+              id="tab-intern"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="login-form"
+              data-role="intern"
+            >
+              <span class="role-number">01</span>Thực tập sinh
+            </button>
+            <button
+              class="role-tab"
+              id="tab-hr"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="login-form"
+              data-role="hr"
+              tabindex="-1"
+            >
+              <span class="role-number">02</span>HR / Mentor / Admin
+            </button>
+          </div>
+
+          <p><a href="index.html?setup=register">Đăng ký thực tập sinh</a> · <a href="index.html?setup=admin">Tạo Admin lần đầu</a></p>
+          <form id="login-form">
+            <div class="field">
+              <div class="field-heading">
+                <label id="identity-label" for="identity"
+                  >Mã sinh viên hoặc email</label
+                >
+              </div>
+              <input
+                id="identity"
+                name="identity"
+                type="text"
+                placeholder="Ví dụ: SV001 hoặc email@truong.edu.vn"
+                autocomplete="username"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <div class="field-heading">
+                <label for="password">Mật khẩu</label>
+                <button class="text-button" id="forgot-password" type="button">
+                  Quên mật khẩu?
+                </button>
+              </div>
+              <div class="input-wrap">
+                <input
+                  class="password-input"
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="Nhập mật khẩu"
+                  autocomplete="current-password"
+                  required
+                />
+                <button
+                  class="password-toggle"
+                  id="password-toggle"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Hiện
+                </button>
+              </div>
+            </div>
+
+            <label class="remember-row" for="remember-me">
+              <input id="remember-me" name="remember-me" type="checkbox" />
+              <span>Duy trì đăng nhập trên thiết bị này</span>
+            </label>
+
+            <button class="submit-button" type="submit">
+              <span>Đăng nhập</span>
+              <span class="submit-arrow" aria-hidden="true">&#8594;</span>
+            </button>
+            <p class="form-note" id="form-note">
+              Đăng nhập bằng mã sinh viên hoặc email đã đăng ký.
+            </p>
+          </form>
+          <p
+            class="status-message"
+            id="status-message"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </div>
+
+        <footer class="page-footer">
+          <span>© 2026 Career Portal</span>
+          <span>Hỗ trợ đăng nhập</span>
+        </footer>
+      </section>
+    </main>
+
+    <script src="session-bridge.js"></script>
+    <script>
+      const roleContent = {
+        intern: {
+          title: "Chào bạn, thực tập sinh",
+          intro: "Đăng nhập để tiếp tục quản lý hồ sơ thực tập.",
+          identityLabel: "Mã sinh viên hoặc email",
+          identityType: "text",
+          placeholder: "Ví dụ: SV001 hoặc email@truong.edu.vn",
+          storyTitle: "Hành trình nghề nghiệp bắt đầu từ đây.",
+          storyDescription:
+            "Một bước đăng nhập để theo dõi hồ sơ và bắt đầu kỳ thực tập của bạn.",
+          watermark: "01",
+          count: "01 / 02",
+          note: "Đăng nhập bằng mã sinh viên hoặc email đã đăng ký.",
+        },
+        hr: {
+          title: "Chào mừng đội ngũ HR",
+          intro: "Đăng nhập bằng tài khoản nhân sự được cấp.",
+          identityLabel: "Email công việc",
+          identityType: "email",
+          placeholder: "ten@congty.vn",
+          storyTitle: "Tìm đúng người. Dẫn đúng hướng.",
+          storyDescription:
+            "Không gian dành riêng cho đội ngũ nhân sự quản lý chương trình thực tập.",
+          watermark: "HR",
+          count: "02 / 02",
+          note: "Dành cho tài khoản HR, Mentor và Quản trị viên được cấp.",
+        },
+      };
+
+      const API_BASE = "http://localhost:5134/api";
+      const SESSION_KEY = "career-portal-intern-profile-id";
+      const tabs = [...document.querySelectorAll(".role-tab")];
+      const identity = document.getElementById("identity");
+      const status = document.getElementById("status-message");
+      const loginForm = document.getElementById("login-form");
+      let activeRole = "intern";
+
+      function setRole(role) {
+        activeRole = role;
+        const content = roleContent[role];
+        tabs.forEach((tab) => {
+          const selected = tab.dataset.role === role;
+          tab.setAttribute("aria-selected", String(selected));
+          tab.tabIndex = selected ? 0 : -1;
+        });
+        document.getElementById("form-title").textContent = content.title;
+        document.getElementById("form-intro").textContent = content.intro;
+        document.getElementById("identity-label").textContent =
+          content.identityLabel;
+        identity.type = content.identityType;
+        identity.placeholder = content.placeholder;
+        document.getElementById("form-note").textContent = content.note;
+        document.getElementById("story-title").textContent = content.storyTitle;
+        document.getElementById("story-description").textContent =
+          content.storyDescription;
+        document.getElementById("story-panel").dataset.watermark =
+          content.watermark;
+        document.getElementById("story-count").textContent = content.count;
+        status.textContent = "";
+        status.removeAttribute("data-state");
+      }
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => setRole(tab.dataset.role));
+        tab.addEventListener("keydown", (event) => {
+          if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+          event.preventDefault();
+          const nextIndex =
+            (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) %
+            tabs.length;
+          tabs[nextIndex].focus();
+          setRole(tabs[nextIndex].dataset.role);
+        });
+      });
+
+      document
+        .getElementById("password-toggle")
+        .addEventListener("click", (event) => {
+          const button = event.currentTarget;
+          const showing = identity.form.elements.password.type === "text";
+          identity.form.elements.password.type = showing ? "password" : "text";
+          button.textContent = showing ? "Hiện" : "Ẩn";
+          button.setAttribute("aria-pressed", String(!showing));
+        });
+
+      document
+        .getElementById("forgot-password")
+        .addEventListener("click", () => {
+          status.dataset.state = "info";
+          status.textContent =
+            "Vui lòng liên hệ bộ phận hỗ trợ để được cấp lại mật khẩu.";
+        });
+
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          if (!event.currentTarget.reportValidity()) return;
+
+          const submitButton = loginForm.querySelector('button[type="submit"]');
+          const values = new FormData(loginForm);
+          submitButton.disabled = true;
+          status.dataset.state = "info";
+          status.textContent = "Đang xác thực...";
+          try {
+            const response = await fetch(`${API_BASE}/${activeRole === 'hr' ? 'auth/login' : 'interns/login'}`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                identity: String(values.get("identity")).trim(),
+                password: values.get("password"),
+              }),
+            });
+            const result = await response.json().catch(() => null);
+            if (!response.ok) {
+              throw new Error(
+                result?.message ?? "Không đăng nhập được. Vui lòng thử lại.",
+              );
+            }
+
+            const profileId = String(result.id);
+            if (document.getElementById("remember-me").checked) {
+              localStorage.setItem(SESSION_KEY, profileId);
+              sessionStorage.removeItem(SESSION_KEY);
+            } else {
+              sessionStorage.setItem(SESSION_KEY, profileId);
+              localStorage.removeItem(SESSION_KEY);
+            }
+            window.location.assign(activeRole === 'intern' ? 'thuc-tap-sinh.html' : result.role === 'Mentor' ? 'mentor.html' : 'hr.html');
+          } catch (error) {
+            status.dataset.state = "error";
+            status.textContent =
+              error instanceof Error
+                ? error.message
+                : "Không kết nối được API.";
+          } finally {
+            submitButton.disabled = false;
+          }
+        });
+    </script>
+  </body>
+</html>
